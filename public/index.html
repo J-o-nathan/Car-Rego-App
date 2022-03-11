@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>Vehicle Loogbook</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+
+  <!-- Custom styles for this template -->
+  <link href="css.css" rel="stylesheet">
+</head>
+
+<body class="text-center">
+  <form class="form-signin" method="post" action="/registered.html">
+    <h1 class="h2 mb-3 font-weight-normal">Pool Vehicle Logbook</h1>
+    <h3 id="vehicle" class="h3 mb-3 font-weight-normal"></h3>
+    <label for="name" class="sr-only">Name</label>
+    <input type="input" id="name" name="name" class="form-control" placeholder="Enter Your Name" required autofocus>
+    <label for="odo" class="sr-only">Odometer</label>
+    <input type="number" id="odo" name="odo" class="form-control" placeholder="Enter Odometer Reading" autocomplete="off" required>
+    <br>
+    <div class="btn-group btn-group-toggle mb-3" data-toggle="buttons">
+      <label class="btn btn-outline-danger">
+        <input type="radio" value="check-IN" class="form-check-input" name="checked" id="check-in" autocomplete="off" required> Check-IN
+      </label>
+      <label class="btn btn-outline-success">
+        <input type="radio" value="check-OUT" class="form-check-input" name="checked" id="check-out" autocomplete="off"> Check-OUT
+      </label>
+    </div>
+    <input type="hidden" id="rego" name="rego" value="">
+    <br>
+    <button class="btn btn-lg btn-primary btn-block" type="submit">Submit Entry</button>
+    <p class="mt-5 mb-3 text-muted">&copy; 2020</p>
+  </form>
+</body>
+
+<!-- Use hidden form to grab the front-end input to pass to the back-end -->
+
+<script>
+  // Get the URL parameter that is called rego from the query string (provided by unique QR code)
+  let url = new URL(window.location.href)
+  let rego = url.searchParams.get("rego")
+
+  // If rego isn't set then just make it NA
+  if (!rego) { rego = "NA" }
+
+  // Set the hidden Field in the form to be the rego.
+  document.getElementById("rego").value = rego
+  document.getElementById("vehicle").innerHTML = 'For vehicle: ' + rego
+</script>
+
+</html>
